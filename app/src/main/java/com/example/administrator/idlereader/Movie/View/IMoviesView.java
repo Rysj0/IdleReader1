@@ -12,4 +12,5 @@ public interface IMoviesView {
     void hideDialog();
     void showDialog();
     void showErrorMsg(Throwable throwable);
+    //dd
 }

@@ -8,7 +8,9 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
 
 /**
  * Created by Administrator on 2018/5/19.
@@ -23,14 +25,15 @@ public class RetrofitHelper {
                 .baseUrl(host)
                 .client(getOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
          retrofitService = retrofit.create(RetrofitService.class);
     }
 
-    public Call<NewsBean> getNews(String type, String id, int startPage) {
+    public Observable<NewsBean> getNews(String type, String id, int startPage) {
         return retrofitService.getNews(type, id, startPage);
     }
-    public Call<MoviesBean> getMovies(String total) {
+    public Observable<MoviesBean> getMovies(String total) {
         return retrofitService.getMovie(total);
     }
 
